@@ -19,7 +19,8 @@ export default function Home() {
 
   return (
     <>
-      {/* ARButton precisa ter o domOverlay com a referência correta */}
+      {/* Contêiner para posicionar o ARButton */}
+
       {overlayContent && (
         <ARButton
           sessionInit={{
@@ -29,6 +30,7 @@ export default function Home() {
           }}
         />
       )}
+
 
       <Canvas>
         {/* Os controles de órbita podem ser descomentados se forem necessários */}
