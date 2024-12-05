@@ -6,7 +6,7 @@ import * as THREE from 'three';
 
 
 export default function House({ position }: any) {
-    const { scene, animations } = useGLTF('models/heart.glb');
+    const { scene, animations } = useGLTF('models/heart_and_lungs.glb');
     const { actions } = useAnimations(animations, scene);
 
     useEffect(() => {
@@ -23,8 +23,8 @@ export default function House({ position }: any) {
     return (
         <Suspense fallback={null}>
             <pointLight position={[2, 2, 2]} intensity={30} />
-            <mesh castShadow receiveShadow position-y={-1}>
-                <primitive object={scene} scale={1.5} position={position} />
+            <mesh castShadow receiveShadow position-y={0.7}>
+                <primitive object={scene} scale={20} position={position} />
             </mesh>
         </Suspense>
     );
