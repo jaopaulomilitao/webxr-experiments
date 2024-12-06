@@ -23,8 +23,8 @@ export default function Model2({ position }: any) {
     return (
         <Suspense fallback={null}>
             <pointLight position={[2, 2, 2]} intensity={30} />
-            <mesh castShadow receiveShadow position-y={0.7}>
-                <primitive object={scene} scale={20} position={position} />
+            <mesh castShadow receiveShadow position-y={0.7} position={position}>
+                <primitive object={scene} scale={20} />
             </mesh>
         </Suspense>
     );
