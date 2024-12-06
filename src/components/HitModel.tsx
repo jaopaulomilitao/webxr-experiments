@@ -1,18 +1,24 @@
 import { OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
-import { useRef, useState } from "react";
-import * as THREE from "three"; // Import necessário para tipos como Vector3, Quaternion e Object3D
-import Model from "./Model";
+import { Fragment, useRef, useState } from "react";
+import * as THREE from "three";
+import Model1 from "./Model1";
+import Model3 from "./Model3";
+import Model2 from "./Model2";
 
 type ModelData = {
     position: THREE.Vector3;
     id: number;
 };
 
-const HitModel: React.FC = (ref: any) => {
-    const reticleRef = useRef<THREE.Mesh>(null); // Definir o tipo de ref
-    const [models, setModels] = useState<ModelData[]>([]); // Usar o tipo para model data
+interface HitModelProps {
+    currentModelName?: "Model1" | "Model2" | "Model3";
+}
+
+const HitModel: React.FC<HitModelProps> = ({ currentModelName = "Model1" }) => {
+    const reticleRef = useRef<THREE.Mesh>(null);
+    const [models, setModels] = useState<ModelData[]>([]);
 
     const { isPresenting } = useXR();
 
@@ -39,7 +45,7 @@ const HitModel: React.FC = (ref: any) => {
 
         const position = e.intersection.object.position.clone();
         const id = Date.now();
-        setModels((prevModels) => [...prevModels, { position, id }]);
+        setModels([{ position, id }]); // Limpa os modelos anteriores e adiciona o novo
     };
 
     return (
@@ -48,18 +54,25 @@ const HitModel: React.FC = (ref: any) => {
             <ambientLight />
             {isPresenting &&
                 models.map(({ position, id }) => (
-                    <Model key={id} position={position} ref={ref} />
+                    <Fragment key={id}>
+                        {currentModelName === "Model1" && <Model1 key={id} position={position} />}
+                        {currentModelName === "Model2" && <Model2 key={id} position={position} />}
+                        {currentModelName === "Model3" && <Model3 key={id} position={position} />}
+                    </Fragment>
                 ))}
             {isPresenting && (
                 <Interactive onSelect={placeModel}>
                     <mesh ref={reticleRef} rotation-x={-Math.PI / 2}>
-                        <ringGeometry args={[0.1, 0.25, 32]} />
-                        <meshStandardMaterial color={"white"} />
+                        <ringGeometry args={[0.05, 0.08, 32]} />
+                        <meshStandardMaterial color="white" opacity={0.5} transparent={true} />
                     </mesh>
                 </Interactive>
             )}
-
-            {!isPresenting && <Model />}
+            {!isPresenting && currentModelName === "Model1" && <Model1 />}
+            {!isPresenting && currentModelName === "Model2" && (
+                <Model2 />
+            )}
+            {!isPresenting && currentModelName === "Model3" && <Model3 />}
         </>
     );
 };
