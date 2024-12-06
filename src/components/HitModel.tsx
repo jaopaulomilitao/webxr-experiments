@@ -63,8 +63,8 @@ const HitModel: React.FC<HitModelProps> = ({ currentModelName = "Model1" }) => {
             {isPresenting && (
                 <Interactive onSelect={placeModel}>
                     <mesh ref={reticleRef} rotation-x={-Math.PI / 2}>
-                        <ringGeometry args={[0.05, 0.08, 32]} />
-                        <meshStandardMaterial color="white" opacity={0.5} transparent={true} />
+                        <ringGeometry args={[0.05, 0.1, 32]} />
+                        <meshStandardMaterial color="white" opacity={0.7} transparent={true} />
                     </mesh>
                 </Interactive>
             )}
