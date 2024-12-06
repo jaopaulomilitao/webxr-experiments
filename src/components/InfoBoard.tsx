@@ -1,8 +1,13 @@
+import { useInfo } from "@/context/InfoContext";
 import { forwardRef, useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const InfoBoard = forwardRef<HTMLDivElement, any>((props, ref) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+    const { currentInformation } = useInfo();
+
+    // Rest of your code
+
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -26,7 +31,7 @@ const InfoBoard = forwardRef<HTMLDivElement, any>((props, ref) => {
             {/* Texto, mostrado apenas quando está aberto */}
             {isOpen && (
                 <p className="text-sm leading-relaxed bg-black/30 backdrop-blur-md p-4 rounded-3xl font-semibold text-left mt-8">
-                    <strong>O coração</strong> é essencial para a circulação do sangue. Possui quatro cavidades: <strong>átrios</strong> (recebem o sangue) e <strong>ventrículos</strong> (bombeiam o sangue). O sangue desoxigenado vai aos pulmões e o oxigenado é distribuído ao corpo, garantindo nutrientes e oxigênio.
+                    {currentInformation}
                 </p>
 
             )}

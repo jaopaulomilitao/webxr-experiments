@@ -2,7 +2,7 @@ import { OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { Fragment, useRef, useState } from "react";
-import * as THREE from "three"; // Import necessário para tipos como Vector3, Quaternion e Object3D
+import * as THREE from "three";
 import Model1 from "./Model1";
 import Model3 from "./Model3";
 import Model2 from "./Model2";
@@ -45,7 +45,7 @@ const HitModel: React.FC<HitModelProps> = ({ currentModelName = "Model1" }) => {
 
         const position = e.intersection.object.position.clone();
         const id = Date.now();
-        setModels((prevModels) => [...prevModels, { position, id }]);
+        setModels([{ position, id }]); // Limpa os modelos anteriores e adiciona o novo
     };
 
     return (
