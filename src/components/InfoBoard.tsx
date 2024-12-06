@@ -10,7 +10,7 @@ const InfoBoard = forwardRef<HTMLDivElement, any>((props, ref) => {
 
     return (
         <div
-            className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 text-white p-4 rounded-lg w-full max-w-lg shadow-lg transition-all ${isOpen ? "h-64" : "h-12"
+            className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 text-white p-4 rounded-lg w-full max-w-md shadow-lg transition-all m-6 ${isOpen ? "h-64" : "h-12"
                 }`}
             ref={ref}
             {...props}
